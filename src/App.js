@@ -17,11 +17,17 @@ class App extends Component {
   }
 
   render() {
+    const {
+      someReducer: {
+        count,
+      },
+    } = this.props;
+
     return (
       <div className="App">
           <img src={logo} className="App-logo" alt="logo" />
 
-          <span>{this.props.count}</span>
+          <span>{count}</span>
           <button onClick={this.increment}>+ 1</button><br/>
           <button onClick={this.decrement}>- 1</button>
       </div>
@@ -29,9 +35,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps({someReducer}){
   return {
-    count: state.count
+    someReducer,
   };
 }
 
