@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  increment = () => {
+    console.log(this.increment)
+    this.props.dispatch({ type: 'INCREMENT' });
+  }
+
+  decrement = () => {
+    console.log(this.decrement)
+    this.props.dispatch({ type: 'DECREMENT' });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+
+          <span>{this.props.count}</span>
+          <button onClick={this.increment}>+ 1</button><br/>
+          <button onClick={this.decrement}>- 1</button>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    count: state.count
+  };
+}
+
+
+export default connect( mapStateToProps ) (App);
